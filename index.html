@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Anniversaire de Juliette</title>
+  <style>
+    /* Base & background */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: backgroundAnimation 20s ease infinite;
+      overflow-x: hidden;
+      color: #fff;
+    }
+    @keyframes backgroundAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Pages */
+    .page {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .active {
+      display: block;
+    }
+    
+    /* Boutons et inputs */
+    .btn {
+      background-color: #ffffffaa;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #fff;
+    }
+    .answer-input {
+      padding: 10px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      border: none;
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+    }
+    
+    /* Galerie d'images */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .gallery img {
+      max-width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0.7;
+      animation: confettiFall 3s linear infinite;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Étoiles animées */
+    .animated-star {
+      position: absolute;
+      font-size: 2em;
+      animation: starTwinkle 2s infinite;
+    }
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Container pour le confetti -->
+  <div class="confetti" id="confetti"></div>
+  
+  <!-- Page d'accueil -->
+  <div class="page active" id="page-accueil">
+    <h1>Heureux anniversaire Juliette ! Spécialement conçu pou toi.</h1>
+    <p>
+      Aujourd'hui, nous célébrons une Star avec un tourbillon d'émotions et de surprises.<br>
+      Plonge dans ce petit quizz interactive et résous les énigmes pour débloquer des messages cachés et une surprise finale qui illuminera ta journée !
+    </p>
+    <p>
+      <strong>Instructions :</strong> Clique sur le bouton ci-dessous pour débuter. À chaque étape, saisis ta réponse dans le champ prévu et valide pour passer à la suivante. Bonne chance !
+    </p>
+    <button class="btn" onclick="showPage('page-enigme1')">Commencer l'aventure</button>
+    <div class="gallery">
+      <img src="https://files.catbox.moe/6fcwgb.jpg" alt="Photo 1">
+      <img src="https://files.catbox.moe/mvmqr7.jpg" alt="Photo 2">
+      <img src="https://files.catbox.moe/0ct879.jpg" alt="Photo 3">
+      <img src="https://files.catbox.moe/1zjc6t.jpg" alt="Photo 4">
+      <img src="https://files.catbox.moe/ug223k.jpg" alt="Photo 5">
+    </div>
+  </div>
+  
+  <!-- Énigme 1 -->
+  <div class="page" id="page-enigme1">
+    <h2>Énigme 1 : La Couleur du Feu</h2>
+    <p>
+      "Je suis la première couleur d’un arc-en-ciel,<br>
+      symbole d’énergie et de passion.<br>
+      Indice : Je suis la couleur du feu."
+    </p>
+    <input type="text" id="answer1" class="answer-input" placeholder="Ta réponse">
+    <br>
+    <button class="btn" onclick="checkAnswer('answer1', 'rouge', 'page-enigme2')">Valider</button>
+  </div>
+  
+  <!-- Énigme 2 -->
+  <div class="page" id="page-enigme2">
+    <h2>Énigme 2 : La Bulle de Célébration</h2>
+    <p>
+      "Je pétille lors des grandes occasions,<br>
+      on m’ouvre pour fêter les moments précieux.<br>
+      Indice : Je suis l'incontournable boisson festive."
+    </p>
+    <input type="text" id="answer2" class="answer-input" placeholder="Ta réponse">
+    <br>
+    <button class="btn" onclick="checkAnswer('answer2', 'champagne', 'page-enigme3')">Valider</button>
+  </div>
+  
+  <!-- Énigme 3 -->
+  <div class="page" id="page-enigme3">
+    <h2>Énigme 3 : La Beauté Naturelle</h2>
+    <p>
+      "Je symbolise douceur et harmonie,<br>
+      mes pétales égayent les jardins et les cœurs.<br>
+      Indice : Tu me vois souvent en pleine floraison."
+    </p>
+    <input type="text" id="answer3" class="answer-input" placeholder="Ta réponse">
+    <br>
+    <button class="btn" onclick="checkAnswer('answer3', 'fleur', 'page-surprise')">Valider</button>
+  </div>
+  
+  <!-- Page de la Surprise Finale -->
+  <div class="page" id="page-surprise">
+    <h2>Félicitations, Juliette !</h2>
+    <p>
+      Tu as résolu toutes les énigmes et découvert les secrets de cette aventure.<br>
+      Voici ta surprise finale : une vidéo spéciale, une playlist et une explosion de joie pour illuminer ton anniversaire !
+    </p>
+    <!-- Vidéo spéciale -->
+    <video width="320" height="240" controls>
+      <source src="https://files.catbox.moe/lx6cn2.mp4" type="video/mp4">
+      Ton navigateur ne supporte pas la vidéo.
+    </video>
+    <br><br>
+    <!-- Audio festif en mode playlist -->
+    <audio id="finalAudio" controls>
+      <source src="https://files.catbox.moe/uatda3.mp3" type="audio/mpeg">
+      Ton navigateur ne supporte pas l'audio.
+    </audio>
+    <p>
+      Regarde, écoute et profite de chaque instant !
+    </p>
+    <div class="gallery">
+      <img src="https://files.catbox.moe/2jax7n.jpg" alt="Photo 6">
+      <img src="https://files.catbox.moe/9t6p07.jpg" alt="Photo 7">
+      <img src="https://files.catbox.moe/jf1xs9.jpg" alt="Photo 8">
+      <img src="https://files.catbox.moe/ct9qfh.jpg" alt="Photo 9">
+      <img src="https://files.catbox.moe/f1z0ko.jpg" alt="Photo 10">
+      <img src="https://files.catbox.moe/drpfc8.jpg" alt="Photo 11">
+      <img src="https://files.catbox.moe/8wz4e9.jpg" alt="Photo 12">
+      <img src="https://files.catbox.moe/ngnfh3.jpg" alt="Photo 13">
+      <img src="https://files.catbox.moe/lxgmgo.jpg" alt="Photo 14">
+      <img src="https://files.catbox.moe/0waod4.jpg" alt="Photo 15">
+    </div>
+    <br>
+    <button class="btn" onclick="replay()">Rejouer l’aventure</button>
+  </div>
+  
+  <script>
+    // Fonction pour changer de page
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+    
+    // Vérifier les réponses et passer à la page suivante si correct
+    function checkAnswer(inputId, correctAnswer, nextPageId) {
+      const userAnswer = document.getElementById(inputId).value.trim().toLowerCase();
+      if(userAnswer === correctAnswer.toLowerCase()){
+        showPage(nextPageId);
+        document.getElementById(inputId).value = "";
+      } else {
+        alert("Réponse incorrecte, réessaie !");
+      }
+    }
+    
+    // Fonction pour rejouer l’aventure
+    function replay() {
+      showPage('page-accueil');
+      // Réinitialiser la playlist audio
+      currentAudio = 0;
+      finalAudio.src = audioFiles[currentAudio];
+    }
+    
+    // Création de confettis animés
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti');
+      confettiContainer.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const confettiPiece = document.createElement('div');
+        confettiPiece.classList.add('confetti-piece');
+        confettiPiece.style.left = Math.random() * 100 + '%';
+        confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confettiPiece.style.animationDelay = Math.random() * 3 + 's';
+        confettiContainer.appendChild(confettiPiece);
+      }
+    }
+    
+    // Déclencher les confettis quand la page finale est active
+    function checkSurprise() {
+      if(document.getElementById('page-surprise').classList.contains('active')) {
+        createConfetti();
+      }
+    }
+    setInterval(checkSurprise, 500);
+    
+    // Création d'étoiles animées
+    function createStars() {
+      for (let i = 0; i < 20; i++) {
+        const star = document.createElement('div');
+        star.classList.add('animated-star');
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.textContent = '⭐';
+        document.body.appendChild(star);
+      }
+    }
+    createStars();
+    
+    // Gestion de la playlist audio
+    const audioFiles = [
+      "https://files.catbox.moe/uatda3.mp3",
+      "https://files.catbox.moe/c2e5dr.mp3",
+      "https://files.catbox.moe/6ei47h.mp3",
+      "https://files.catbox.moe/s62rae.mp3",
+      "https://files.catbox.moe/b065mn.mp3",
+      "https://files.catbox.moe/bfjasq.mp3",
+      "https://files.catbox.moe/igd192.mp3"
+    ];
+    let currentAudio = 0;
+    const finalAudio = document.getElementById("finalAudio");
+    
+    finalAudio.addEventListener("ended", function() {
+      currentAudio++;
+      if (currentAudio < audioFiles.length) {
+         finalAudio.src = audioFiles[currentAudio];
+         finalAudio.play();
+      }
+    });
+  </script>
+</body>
+</html>
